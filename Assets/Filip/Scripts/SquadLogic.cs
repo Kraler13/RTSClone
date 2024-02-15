@@ -5,18 +5,21 @@ using UnityEngine.AI;
 
 public class SquadLogic : MonoBehaviour
 {
-
+    public List<GameObject> ListOfSpowningPoints;
+    public List<GameObject> ListOfSpowningPointsToChange;
     public float SquadSpeed = 10f;
     private NavMeshAgent navMeshAgent;
     [SerializeField] private float RotationSpeed = 360f;
-    private InputMenager inputMenager;
 
     void Start()
     {
+        foreach (GameObject p in ListOfSpowningPoints)
+        {
+           ListOfSpowningPointsToChange.Add(p);
+        }           
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = SquadSpeed;
         navMeshAgent.angularSpeed = RotationSpeed;
-        inputMenager = GameObject.FindGameObjectWithTag("LvlMenager").GetComponent<InputMenager>();
     }
     public void MoveToDestination(Vector3 destination)
     {
