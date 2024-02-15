@@ -5,20 +5,21 @@ using UnityEngine.AI;
 
 public class UniteLogic : MonoBehaviour
 {
-    public float speed;
-    public float endurance;
-    [SerializeField] private InputMenager inputMenager;
+    private SquadLogic squadLogic;
     private NavMeshAgent navMeshAgent;
-    private float RotationSpeed = 360f;
+    private GameObject pointToFollow;
 
     void Start()
     {
+        squadLogic = GetComponentInParent<SquadLogic>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        
+        navMeshAgent.speed = squadLogic.SquadSpeed;        
+        pointToFollow = squadLogic.ListOfSpowningPoints[0];
+        squadLogic.ListOfSpowningPoints.RemoveAt(0);
     }
 
-    public void MoveToDestination(Vector3 destination)
+    void Update()
     {
-        navMeshAgent.SetDestination(destination);
+        navMeshAgent.SetDestination(pointToFollow.transform.position);
     }
 }
