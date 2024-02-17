@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class SquadLogic : MonoBehaviour
 {
+    public Button SquadButtonPrefab;
     public List<GameObject> ListOfSpowningPoints;
     public List<GameObject> ListOfSpowningPointsToChange;
     public float SquadSpeed = 10f;

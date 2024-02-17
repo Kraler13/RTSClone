@@ -25,7 +25,6 @@ public class SelectObj : MonoBehaviour
     Vector3[] verts;
     Vector3[] vecs;
 
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -33,7 +32,6 @@ public class SelectObj : MonoBehaviour
         dragSelect = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //1. when left mouse button clicked (but not released)
