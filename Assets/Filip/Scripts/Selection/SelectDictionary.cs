@@ -10,11 +10,12 @@ public class SelectDictionary : MonoBehaviour
     {
         int id = go.GetInstanceID();
 
-        if (!(selectedTable.ContainsKey(id)))
+        if (!(selectedTable.ContainsKey(id)) && go.gameObject.tag == "Squad")
         {
             selectedTable.Add(id, go);
             go.AddComponent<SelectionHelper>();
             Debug.Log("Added " + id + " to selected dict");
+            Debug.Log(selectedTable.Count);
         }
     }
 

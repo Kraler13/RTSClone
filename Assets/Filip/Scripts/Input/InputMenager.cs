@@ -37,7 +37,8 @@ public class InputMenager : MonoBehaviour
                 //dodaæ if w momêcie ataku
                 for (int i = 0; i < SelectDictionary.selectedTable.Count; i++)
                 {
-                    list[i].GetComponent<SquadLogic>().MoveToDestination(listOfPoints[i]);
+                    if (list != null)
+                        list[i].GetComponent<SquadLogic>().MoveToDestination(listOfPoints[i]);
                 }
             }
             list.Clear();
@@ -63,16 +64,6 @@ public class InputMenager : MonoBehaviour
         listOfPoints.Add(pointB - offset * 2);
         listOfPoints.Add(pointB - offset * 2 + distanceBetweenSquads * new Vector3(normalizedAB.x, 0, -normalizedAB.z));
         listOfPoints.Add(pointB - offset * 2 - distanceBetweenSquads * new Vector3(normalizedAB.x, 0, -normalizedAB.z));
-        int k = 0;
-        foreach (var point in listOfPoints)
-        {
-            Debug.Log(point);
-            Debug.Log("punkt " + k);
-            k++;
-        }
-
-       
-
     }
 }
 
