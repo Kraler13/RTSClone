@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Szymon/FMOD-kopia/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638437944212610346
+  lastModified: 638437945769861375
   FileSizes:
   - Name: Desktop
     Value: 1155904
@@ -42,7 +42,7 @@ MonoBehaviour:
   - {fileID: -5136568647915607316}
   StringsBanks:
   - {fileID: 4502911346804352124}
-  cacheTime: 638437944212641040
+  cacheTime: 638437945769871390
   cacheVersion: 131616
 --- !u!114 &4011145362132002668
 MonoBehaviour:
@@ -86,7 +86,7 @@ MonoBehaviour:
   Path: Assets/Szymon/FMOD-kopia/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638437944212641040
+  lastModified: 638437945769871390
   FileSizes:
   - Name: Desktop
     Value: 760

@@ -10,7 +10,6 @@ public class HUDMenager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     [SerializeField] private List<GameObject> heroObj;
     [SerializeField] private InputMenager InputMenager;
-    [SerializeField] private GameObject SquadSelectedBar;
     [SerializeField] private SelectObj SelectObj;
     private GameObject k;
     private bool isOverHUD;
