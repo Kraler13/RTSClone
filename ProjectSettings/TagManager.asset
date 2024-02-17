@@ -6,6 +6,8 @@ TagManager:
   tags:
   - LvlMenager
   - Squad
+  - HUD
+  - ActionBar
   layers:
   - Default
   - TransparentFX
