@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class HUDMenager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public List<Button> ActionButtons;
+    public GameObject OneRowButtons;
+    public GameObject TwoRowButtons;
 
     [SerializeField] private List<GameObject> heroObj;
     [SerializeField] private InputMenager InputMenager;
@@ -15,7 +17,8 @@ public class HUDMenager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private bool isOverHUD;
     void Start()
     {
-
+        OneRowButtons.SetActive(false);
+        TwoRowButtons.SetActive(false);
     }
     void Update()
     {

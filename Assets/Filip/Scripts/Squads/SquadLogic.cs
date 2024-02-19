@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class SquadLogic : MonoBehaviour
 {
+    public Image SquadImage;
     public Button SquadButtonPrefab;
     public List<GameObject> ListOfSpowningPoints;
     public List<GameObject> ListOfSpowningPointsToChange;

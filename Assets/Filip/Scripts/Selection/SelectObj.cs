@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectObj : MonoBehaviour
 {
+    [SerializeField] private HUDMenager hudMenager;
     SelectDictionary selected_table;
     RaycastHit hit;
+    private List<Button> buttonList = new List<Button>();
 
     bool dragSelect;
 
-    //Collider variables
-    //=======================================================//
+
 
     MeshCollider selectionBox;
     Mesh selectionMesh;
@@ -18,10 +21,8 @@ public class SelectObj : MonoBehaviour
     Vector3 p1;
     Vector3 p2;
 
-    //the corners of our 2d selection box
     Vector2[] corners;
 
-    //the vertices of our meshcollider
     Vector3[] verts;
     Vector3[] vecs;
 
@@ -34,13 +35,13 @@ public class SelectObj : MonoBehaviour
 
     void Update()
     {
-        //1. when left mouse button clicked (but not released)
+
         if (Input.GetMouseButtonDown(0))
         {
             p1 = Input.mousePosition;
         }
 
-        //2. while left mouse button held
+
         if (Input.GetMouseButton(0))
         {
             if ((p1 - Input.mousePosition).magnitude > 40)
@@ -49,38 +50,42 @@ public class SelectObj : MonoBehaviour
             }
         }
 
-        //3. when mouse button comes up
+
         if (Input.GetMouseButtonUp(0))
         {
-            if (dragSelect == false) //single select
+            if (dragSelect == false)
             {
                 Ray ray = Camera.main.ScreenPointToRay(p1);
 
                 if (Physics.Raycast(ray, out hit, 50000.0f))
                 {
-                    if (Input.GetKey(KeyCode.LeftShift) && hit.transform.gameObject.tag == "Squad") //inclusive select
+                    if (Input.GetKey(KeyCode.LeftShift) && hit.transform.gameObject.tag == "Squad")
                     {
                         selected_table.addSelected(hit.transform.gameObject);
-                    }
-                    else //exclusive selected
-                    {
-                        selected_table.deselectAll();
-                        selected_table.addSelected(hit.transform.gameObject);
-                    }
-                }
-                else //if we didnt hit something
-                {
-                    if (Input.GetKey(KeyCode.LeftShift))
-                    {
-                        //do nothing
+                        AddButton();
                     }
                     else
                     {
                         selected_table.deselectAll();
+                        DeleteButton();
+                        selected_table.addSelected(hit.transform.gameObject);
+                        AddButton();
+                    }
+                }
+                else
+                {
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+
+                    }
+                    else
+                    {
+                        selected_table.deselectAll();
+                        DeleteButton();
                     }
                 }
             }
-            else //marquee select
+            else
             {
                 verts = new Vector3[4];
                 vecs = new Vector3[4];
@@ -101,7 +106,6 @@ public class SelectObj : MonoBehaviour
                     i++;
                 }
 
-                //generate the mesh
                 selectionMesh = generateSelectionMesh(verts, vecs);
 
                 selectionBox = gameObject.AddComponent<MeshCollider>();
@@ -112,11 +116,12 @@ public class SelectObj : MonoBehaviour
                 if (!Input.GetKey(KeyCode.LeftShift))
                 {
                     selected_table.deselectAll();
+                    DeleteButton();
                 }
 
                 Destroy(selectionBox, 0.02f);
 
-            }//end marquee select
+            }
 
             dragSelect = false;
 
@@ -124,6 +129,59 @@ public class SelectObj : MonoBehaviour
 
     }
 
+    void AddButton()
+    {
+        DeleteButton();
+
+        if (selected_table.selectedTable.Count > 0)
+        {
+            if (selected_table.selectedTable.Count <= 5)
+            {
+                hudMenager.OneRowButtons.SetActive(true);
+                hudMenager.TwoRowButtons.SetActive(false);
+
+                foreach (var item in selected_table.selectedTable.Values)
+                {
+                    var createdButton = Instantiate(item.GetComponent<SquadLogic>().SquadButtonPrefab, hudMenager.OneRowButtons.transform);
+                    buttonList.Add(createdButton);
+                }
+            }
+            else
+            {
+                hudMenager.TwoRowButtons.SetActive(true);
+                hudMenager.OneRowButtons.SetActive(false);
+
+                int i = 0;
+                foreach (var item in selected_table.selectedTable.Values)
+                {
+                    var row = i < 5 ? hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().FirstRow : hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().SecondRow;
+                    var createdButton = Instantiate(item.GetComponent<SquadLogic>().SquadButtonPrefab, row.transform);
+                    buttonList.Add(createdButton);
+                    i++;
+                }
+            }
+        }
+        else
+        {
+            hudMenager.OneRowButtons.SetActive(false);
+            hudMenager.TwoRowButtons.SetActive(false);
+        }
+    }
+
+
+
+    void DeleteButton()
+    {
+
+        foreach (var item in buttonList)
+        {
+            Destroy(item.gameObject);
+        }
+        buttonList.Clear();
+        hudMenager.OneRowButtons.SetActive(false);
+        hudMenager.TwoRowButtons.SetActive(false);
+
+    }
     private void OnGUI()
     {
         if (dragSelect == true)
@@ -134,14 +192,11 @@ public class SelectObj : MonoBehaviour
         }
     }
 
-    //create a bounding box (4 corners in order) from the start and end mouse position
     Vector2[] getBoundingBox(Vector2 p1, Vector2 p2)
     {
-        // Min and Max to get 2 corners of rectangle regardless of drag direction.
         var bottomLeft = Vector3.Min(p1, p2);
         var topRight = Vector3.Max(p1, p2);
 
-        // 0 = top left; 1 = top right; 2 = bottom left; 3 = bottom right;
         Vector2[] corners =
         {
             new Vector2(bottomLeft.x, topRight.y),
@@ -153,7 +208,6 @@ public class SelectObj : MonoBehaviour
 
     }
 
-    //generate a mesh from the 4 bottom points
     Mesh generateSelectionMesh(Vector3[] corners, Vector3[] vecs)
     {
         Vector3[] verts = new Vector3[8];
@@ -178,7 +232,10 @@ public class SelectObj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Squad")
+        if (other.gameObject.tag == "Squad")
+        {
             selected_table.addSelected(other.gameObject);
+            AddButton();
+        }
     }
 }

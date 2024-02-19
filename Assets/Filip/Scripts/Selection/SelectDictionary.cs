@@ -7,8 +7,6 @@ using static UnityEditor.Progress;
 public class SelectDictionary : MonoBehaviour
 {
     public Dictionary<int, GameObject> selectedTable = new Dictionary<int, GameObject>();
-    [SerializeField] private Image HUDCaracterTab;
-    private List<Button> buttonList = new List<Button>();
     public void addSelected(GameObject go)
     {
         int id = go.GetInstanceID();
@@ -17,14 +15,11 @@ public class SelectDictionary : MonoBehaviour
         {
             selectedTable.Add(id, go);
             go.AddComponent<SelectionHelper>();
-            foreach (KeyValuePair<int, GameObject> item in selectedTable)
-            {
-                var createdButton = Instantiate(item.Value.GetComponent<SquadLogic>().SquadButtonPrefab, HUDCaracterTab.transform);
-                buttonList.Add(createdButton);
-            }
+            
             Debug.Log("Added " + id + " to selected dict");
             Debug.Log(selectedTable.Count);
         }
+        
     }
 
     public void deselect(int id)
@@ -39,13 +34,7 @@ public class SelectDictionary : MonoBehaviour
         {
             if (pair.Value != null)
             {
-                Destroy(selectedTable[pair.Key].GetComponent<SelectionHelper>());
-                foreach (var item in buttonList)
-                {
-                    Destroy(item.gameObject);
-                }
-                buttonList.Clear();
-
+                Destroy(selectedTable[pair.Key].GetComponent<SelectionHelper>());               
             }
         }
         selectedTable.Clear();
