@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Poruszanie oraz two¿enie pojedyñczych jednostek
 public class UniteLogic : MonoBehaviour
 {
     private SquadLogic squadLogic;
     private NavMeshAgent navMeshAgent;
-    private GameObject pointToFollow;
+    public GameObject pointToFollow;
 
     void Start()
     {

@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 2856694713381892140}
   - component: {fileID: -8426274977243484377}
   m_Layer: 5
-  m_Name: SquadButton
+  m_Name: SecendSquadButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

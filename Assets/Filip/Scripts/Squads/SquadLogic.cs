@@ -6,46 +6,28 @@ using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+//przypisujemy do ka¿dego sqadu
+//bierzemy z t¹d punkty za którymi nale¿y pot¹¿aæ dla jednostki
+//przypisujemy odpowiedni Button do danej jednostki
 public class SquadLogic : MonoBehaviour
 {
-    public Image SquadImage;
+    public GameObject Unite;
+    public Sprite SquadImage;
     public Button SquadButtonPrefab;
     public List<GameObject> ListOfSpowningPoints;
     public List<GameObject> ListOfSpowningPointsToChange;
     public float SquadSpeed = 10f;
     public bool IsSquadChosen = false;
-    public bool IsLeftClicked = false;
-    private NavMeshAgent navMeshAgent;
+    public bool IsCaptureingAPoint = false;
+    public ResorsSriptableObj resorsSriptableObj;
     [SerializeField] private float RotationSpeed = 360f;
+    private NavMeshAgent navMeshAgent;
 
     void Start()
     {
-        var HUD = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDMenager>().ActionButtons;
-        HUD[0].onClick.AddListener(() => ButtonOneLeft());
-
-        EventTrigger triggerRight = HUD[0].gameObject.AddComponent<EventTrigger>();
-        EventTrigger.Entry entryRight = new EventTrigger.Entry();
-        entryRight.eventID = EventTriggerType.PointerDown;
-        entryRight.callback.AddListener((eventData) => ButtonActionRight());
-        triggerRight.triggers.Add(entryRight);
-
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = SquadSpeed;
         navMeshAgent.angularSpeed = RotationSpeed;
-    }
-
-    public void ButtonOneLeft()
-    {
-        IsLeftClicked = true;
-        Debug.Log("lewy");
-        IsLeftClicked = false;
-
-    }
-
-    public void ButtonActionRight()
-    { 
-        if (!IsLeftClicked) 
-        Debug.Log("prawy");
     }
 
     public void MoveToDestination(Vector3 destination)

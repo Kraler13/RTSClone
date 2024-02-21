@@ -4,12 +4,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Wybieranie obiektów oraz two¿enie do nich odpowiednich buttonów
 public class SelectObj : MonoBehaviour
 {
     [SerializeField] private HUDMenager hudMenager;
     SelectDictionary selected_table;
     RaycastHit hit;
-    private List<Button> buttonList = new List<Button>();
+    public List<Button> buttonList = new List<Button>();
 
     bool dragSelect;
 
@@ -135,6 +136,7 @@ public class SelectObj : MonoBehaviour
 
         if (selected_table.selectedTable.Count > 0)
         {
+            Debug.Log(selected_table.selectedTable.Count);
             if (selected_table.selectedTable.Count <= 5)
             {
                 hudMenager.OneRowButtons.SetActive(true);
@@ -143,6 +145,8 @@ public class SelectObj : MonoBehaviour
                 foreach (var item in selected_table.selectedTable.Values)
                 {
                     var createdButton = Instantiate(item.GetComponent<SquadLogic>().SquadButtonPrefab, hudMenager.OneRowButtons.transform);
+                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadImage.sprite = item.GetComponent<SquadLogic>().SquadImage;
+                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadConnectedToButton = item;
                     buttonList.Add(createdButton);
                 }
             }
@@ -156,6 +160,8 @@ public class SelectObj : MonoBehaviour
                 {
                     var row = i < 5 ? hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().FirstRow : hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().SecondRow;
                     var createdButton = Instantiate(item.GetComponent<SquadLogic>().SquadButtonPrefab, row.transform);
+                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadImage.sprite = item.GetComponent<SquadLogic>().SquadImage;
+                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadConnectedToButton = item;
                     buttonList.Add(createdButton);
                     i++;
                 }

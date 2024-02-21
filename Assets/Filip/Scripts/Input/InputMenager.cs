@@ -5,7 +5,7 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
-
+using System.Linq;
 public class InputMenager : MonoBehaviour
 {
     [SerializeField] SelectDictionary SelectDictionary;
@@ -21,12 +21,12 @@ public class InputMenager : MonoBehaviour
     void HandleInput()
     {
         var table = SelectDictionary.selectedTable;
-        if (Input.GetMouseButtonDown(1) && table.Count != 0)
+        if (Input.GetMouseButtonDown(1) && table.Count != 0 )
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.tag != "Objective")
             {
 
                 foreach (KeyValuePair<int, GameObject> gO in SelectDictionary.selectedTable)
@@ -45,6 +45,31 @@ public class InputMenager : MonoBehaviour
             listOfPoints.Clear();
         }
     }
+    void CaptureAPoint()
+    {
+        var table = SelectDictionary.selectedTable;
+        if (Input.GetMouseButtonDown(1) && table.Count != 0)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.tag == "Objective")
+            {
+                DistanceToObjetive(hit.point);
+                foreach (KeyValuePair<int, GameObject> gO in SelectDictionary.selectedTable)
+                {
+                    list.Add(gO.Value);
+                }
+                MathfHendle(hit.point);
+                //dodaæ if w momêcie ataku
+                for (int i = 0; i < SelectDictionary.selectedTable.Count; i++)
+                {
+                    if (list != null)
+                        list[i].GetComponent<SquadLogic>().MoveToDestination(listOfPoints[i]);
+                }
+            }
+        }
+    }
     void MathfHendle(Vector3 hitPointValue)
     {
         Vector3 pointA = list[0].transform.position;
@@ -52,8 +77,7 @@ public class InputMenager : MonoBehaviour
         float radius = Vector3.Distance(pointB, pointA);
         Vector3 vectorAB = pointB - pointA;
         Vector3 normalizedAB = vectorAB.normalized;
-        Vector3 offset = distanceBetweenSquads * normalizedAB;
-        
+        Vector3 offset = distanceBetweenSquads * normalizedAB;       
 
         listOfPoints.Add(pointB);
         listOfPoints.Add(pointB + distanceBetweenSquads * new Vector3(normalizedAB.x, 0, -normalizedAB.z));
@@ -65,6 +89,23 @@ public class InputMenager : MonoBehaviour
         listOfPoints.Add(pointB - offset * 2 + distanceBetweenSquads * new Vector3(normalizedAB.x, 0, -normalizedAB.z));
         listOfPoints.Add(pointB - offset * 2 - distanceBetweenSquads * new Vector3(normalizedAB.x, 0, -normalizedAB.z));
     }
+
+    void DistanceToObjetive(Vector3 hitPointValue)
+    {
+        
+        Dictionary<float, GameObject> Dick = new Dictionary<float, GameObject>();
+        foreach (KeyValuePair<int, GameObject> gO in SelectDictionary.selectedTable)
+        {
+            Vector3 pointA = gO.Value.transform.position;
+            Vector3 pointB = hitPointValue;
+            float radius = Vector3.Distance(pointB, pointA);
+            Dick.Add(radius, gO.Value);
+        }
+        var sortedDick = from entry in Dick orderby entry.Key ascending select entry;
+        var firstEntry = sortedDick.FirstOrDefault();
+        firstEntry.Value.GetComponent<SquadLogic>().IsCaptureingAPoint = true;
+    }
+
 }
 
 

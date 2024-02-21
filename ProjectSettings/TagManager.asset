@@ -8,6 +8,8 @@ TagManager:
   - Squad
   - HUD
   - ActionBar
+  - Selector
+  - Objective
   layers:
   - Default
   - TransparentFX
