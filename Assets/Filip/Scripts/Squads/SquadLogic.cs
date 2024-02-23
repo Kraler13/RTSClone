@@ -19,9 +19,12 @@ public class SquadLogic : MonoBehaviour
     public float SquadSpeed = 10f;
     public bool IsSquadChosen = false;
     public bool IsCaptureingAPoint = false;
+    public bool IsConnetedToAPoint = false;
+    public bool CapturedAPoint = false;
     public ResorsSriptableObj resorsSriptableObj;
     [SerializeField] private float RotationSpeed = 360f;
     private NavMeshAgent navMeshAgent;
+    public ObjectivePointLogic objective;
 
     void Start()
     {
@@ -29,10 +32,20 @@ public class SquadLogic : MonoBehaviour
         navMeshAgent.speed = SquadSpeed;
         navMeshAgent.angularSpeed = RotationSpeed;
     }
+    private void Update()
+    {        
+            if (IsCaptureingAPoint && !CapturedAPoint && IsConnetedToAPoint && objective != null)
+            {
+                objective.PercentOfCapture += 2;
+            }        
+    }
+
 
     public void MoveToDestination(Vector3 destination)
     {
         Vector3 direction = destination - transform.position;
         navMeshAgent.SetDestination(destination);
+        //IsCaptureingAPoint = false;
+        //IsConnetedToAPoint = false;
     }
 }

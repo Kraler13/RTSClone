@@ -65,6 +65,11 @@ public class SelectObj : MonoBehaviour
                         selected_table.addSelected(hit.transform.gameObject);
                         AddButton();
                     }
+                    else if (Input.GetKey(KeyCode.LeftShift) && hit.transform.gameObject.tag == "Builder")
+                    {
+                        selected_table.addSelected(hit.transform.gameObject);
+                        AddButton();
+                    }
                     else
                     {
                         selected_table.deselectAll();
@@ -136,7 +141,6 @@ public class SelectObj : MonoBehaviour
 
         if (selected_table.selectedTable.Count > 0)
         {
-            Debug.Log(selected_table.selectedTable.Count);
             if (selected_table.selectedTable.Count <= 5)
             {
                 hudMenager.OneRowButtons.SetActive(true);
@@ -239,6 +243,11 @@ public class SelectObj : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Squad")
+        {
+            selected_table.addSelected(other.gameObject);
+            AddButton();
+        }
+        else if (other.gameObject.tag == "Builder")
         {
             selected_table.addSelected(other.gameObject);
             AddButton();

@@ -11,7 +11,7 @@ public class SelectDictionary : MonoBehaviour
     {
         int id = go.GetInstanceID();
 
-        if (!(selectedTable.ContainsKey(id)) && go.gameObject.tag == "Squad")
+        if (!(selectedTable.ContainsKey(id)) && (go.gameObject.tag == "Squad" || go.gameObject.tag == "Builder"))
         {
             selectedTable.Add(id, go);
             go.AddComponent<SelectionHelper>();          

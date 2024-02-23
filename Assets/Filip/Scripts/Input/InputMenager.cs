@@ -16,6 +16,7 @@ public class InputMenager : MonoBehaviour
     void Update()
     {
         HandleInput();
+        CaptureAPoint();
     }
 
     void HandleInput()
@@ -55,11 +56,11 @@ public class InputMenager : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.tag == "Objective")
             {
-                DistanceToObjetive(hit.point);
                 foreach (KeyValuePair<int, GameObject> gO in SelectDictionary.selectedTable)
                 {
                     list.Add(gO.Value);
                 }
+                DistanceToObjetive(hit.point);
                 MathfHendle(hit.point);
                 //dodaæ if w momêcie ataku
                 for (int i = 0; i < SelectDictionary.selectedTable.Count; i++)
@@ -91,8 +92,7 @@ public class InputMenager : MonoBehaviour
     }
 
     void DistanceToObjetive(Vector3 hitPointValue)
-    {
-        
+    {       
         Dictionary<float, GameObject> Dick = new Dictionary<float, GameObject>();
         foreach (KeyValuePair<int, GameObject> gO in SelectDictionary.selectedTable)
         {
@@ -104,8 +104,12 @@ public class InputMenager : MonoBehaviour
         var sortedDick = from entry in Dick orderby entry.Key ascending select entry;
         var firstEntry = sortedDick.FirstOrDefault();
         firstEntry.Value.GetComponent<SquadLogic>().IsCaptureingAPoint = true;
+        GameObject foundObject = list.Find(obj => obj.name == firstEntry.Value.name);
+        int foundObjectIndex = list.IndexOf(foundObject);
+        GameObject temp = list[0];
+        list[0] = foundObject;
+        list[foundObjectIndex] = temp;
     }
-
 }
 
 

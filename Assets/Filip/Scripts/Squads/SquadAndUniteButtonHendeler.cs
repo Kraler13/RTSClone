@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SecondSquadButton : MonoBehaviour
+public class SquadAndUniteButtonHendeler : MonoBehaviour
 {
+    public Sprite SquadImage;
+    public Button SquadButtonPrefab;
+    public GameObject SquadConnectedToButton;
+
     // Start is called before the first frame update
     void Start()
     {
