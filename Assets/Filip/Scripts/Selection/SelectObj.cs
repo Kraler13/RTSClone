@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 //Wybieranie obiektów oraz two¿enie do nich odpowiednich buttonów
 public class SelectObj : MonoBehaviour
@@ -65,7 +66,7 @@ public class SelectObj : MonoBehaviour
                         selected_table.addSelected(hit.transform.gameObject);
                         AddButton();
                     }
-                    else if (Input.GetKey(KeyCode.LeftShift) && hit.transform.gameObject.tag == "Builder")
+                    else if (Input.GetKey(KeyCode.LeftShift) && hit.transform.gameObject.tag == "Builder" )
                     {
                         selected_table.addSelected(hit.transform.gameObject);
                         AddButton();
@@ -141,35 +142,33 @@ public class SelectObj : MonoBehaviour
 
         if (selected_table.selectedTable.Count > 0)
         {
-            if (selected_table.selectedTable.Count <= 5)
-            {
+            //if (selected_table.selectedTable.Count <= 5)
+            //{
                 hudMenager.OneRowButtons.SetActive(true);
                 hudMenager.TwoRowButtons.SetActive(false);
 
                 foreach (var item in selected_table.selectedTable.Values)
                 {
-                    var createdButton = Instantiate(item.GetComponent<SquadLogic>().SquadButtonPrefab, hudMenager.OneRowButtons.transform);
-                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadImage.sprite = item.GetComponent<SquadLogic>().SquadImage;
-                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadConnectedToButton = item;
+                    var createdButton = Instantiate(item.GetComponent<SquadAndUniteButtonHendeler>().SquadButtonPrefab, hudMenager.OneRowButtons.transform);
+                    createdButton.GetComponent<SquadAndUniteButtonHendeler>().SquadConnectedToButton = item;
                     buttonList.Add(createdButton);
                 }
-            }
-            else
-            {
-                hudMenager.TwoRowButtons.SetActive(true);
-                hudMenager.OneRowButtons.SetActive(false);
+            //}
+            //else
+            //{
+            //    hudMenager.TwoRowButtons.SetActive(true);
+            //    hudMenager.OneRowButtons.SetActive(false);
 
-                int i = 0;
-                foreach (var item in selected_table.selectedTable.Values)
-                {
-                    var row = i < 5 ? hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().FirstRow : hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().SecondRow;
-                    var createdButton = Instantiate(item.GetComponent<SquadLogic>().SquadButtonPrefab, row.transform);
-                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadImage.sprite = item.GetComponent<SquadLogic>().SquadImage;
-                    createdButton.GetComponent<LightBotsSquadActionButtons>().SquadConnectedToButton = item;
-                    buttonList.Add(createdButton);
-                    i++;
-                }
-            }
+            //    int i = 0;
+            //    foreach (var item in selected_table.selectedTable.Values)
+            //    {
+            //        var row = i < 5 ? hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().FirstRow : hudMenager.TwoRowButtons.GetComponent<TwoRowMenager>().SecondRow;
+            //        var createdButton = Instantiate(item.GetComponent<SquadAndUniteButtonHendeler>().SquadButtonPrefab, row.transform);
+            //        createdButton.GetComponent<SquadAndUniteButtonHendeler>().SquadConnectedToButton = item;
+            //        buttonList.Add(createdButton);
+            //        i++;
+            //    }
+            //}
         }
         else
         {

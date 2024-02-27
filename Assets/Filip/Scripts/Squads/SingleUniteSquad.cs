@@ -8,7 +8,7 @@ public class SingleUniteSquad : MonoBehaviour
 {
     public Button SquadButtonPrefab;
     public Sprite SquadImage;
-    private NavMeshAgent navMeshAgent;
+    [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private float uniteSpeed = 10f;
     [SerializeField] private float RotationSpeed = 360f;
     void Start()

@@ -12,8 +12,6 @@ using UnityEngine.UI;
 public class SquadLogic : MonoBehaviour
 {
     public GameObject Unite;
-    public Sprite SquadImage;
-    public Button SquadButtonPrefab;
     public List<GameObject> ListOfSpowningPoints;
     public List<GameObject> ListOfSpowningPointsToChange;
     public float SquadSpeed = 10f;
@@ -39,7 +37,6 @@ public class SquadLogic : MonoBehaviour
                 objective.PercentOfCapture += 2;
             }        
     }
-
 
     public void MoveToDestination(Vector3 destination)
     {

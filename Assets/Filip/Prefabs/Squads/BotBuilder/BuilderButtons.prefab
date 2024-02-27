@@ -164,7 +164,8 @@ GameObject:
   - component: {fileID: 2856694713381892138}
   - component: {fileID: 2856694713381892141}
   - component: {fileID: 2856694713381892140}
-  - component: {fileID: -8426274977243484377}
+  - component: {fileID: 6777654081844438133}
+  - component: {fileID: 5335766894170862477}
   m_Layer: 5
   m_Name: BuilderButtons
   m_TagString: Untagged
@@ -276,7 +277,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-8426274977243484377
+--- !u!114 &6777654081844438133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,11 +286,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2856694713381892142}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be9c6c0261a2a4a409d400b96cb879c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f33e01861542304e91fda40fc076ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SquadButtonPrefab: {fileID: 2856694713381892140}
+  SquadConnectedToButton: {fileID: 0}
+--- !u!114 &5335766894170862477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2856694713381892142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6c417156bf5b241b168081e4be0735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ActionButtonsScriptableObj: {fileID: 11400000, guid: b052a5e480d52a541bdaa269a58969bb,
     type: 2}
   SquadConnectedToButton: {fileID: 0}
-  SquadImage: {fileID: 2856694712429798440}
-  HPImage: {fileID: 2856694712569872165}
+  HPImage: {fileID: 0}

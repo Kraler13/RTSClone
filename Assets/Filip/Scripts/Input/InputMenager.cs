@@ -15,11 +15,15 @@ public class InputMenager : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
+        SquadHandleInput();
         CaptureAPoint();
     }
 
-    void HandleInput()
+    void UniteHandleInput()
+    {
+
+    }
+    void SquadHandleInput()
     {
         var table = SelectDictionary.selectedTable;
         if (Input.GetMouseButtonDown(1) && table.Count != 0 )
@@ -36,10 +40,16 @@ public class InputMenager : MonoBehaviour
                 }
                 MathfHendle(hit.point);
                 //dodaæ if w momêcie ataku
+
                 for (int i = 0; i < SelectDictionary.selectedTable.Count; i++)
                 {
-                    if (list != null)
-                        list[i].GetComponent<SquadLogic>().MoveToDestination(listOfPoints[i]);
+                    list[i].TryGetComponent<SquadLogic>(out SquadLogic squadLogic);
+                    if (squadLogic != null)
+                    {
+                        squadLogic.MoveToDestination(listOfPoints[i]);
+                    }
+                    else
+                        list[i].GetComponent<SingleUniteSquad>().MoveToDestination(listOfPoints[i]);
                 }
             }
             list.Clear();

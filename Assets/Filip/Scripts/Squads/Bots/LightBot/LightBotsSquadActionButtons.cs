@@ -13,17 +13,13 @@ public class LightBotsSquadActionButtons : MonoBehaviour
     private int maxUnites = 9;
     public GameObject SquadConnectedToButton;
     private SquadLogic squadLogic;
-    public Image SquadImage;
     public Image HPImage;
-    private SelectObj selectObj;
     private int uniteCount = 1;
     private void Start()
     {
-        selectObj = GameObject.FindGameObjectWithTag("Selector").GetComponent<SelectObj>();
         Button thisButton = GetComponent<Button>();
         gameObject.GetComponent<Button>().onClick.AddListener(AllButtons);
-        squadLogic = SquadConnectedToButton.GetComponent<SquadLogic>();
-
+        squadLogic = GetComponent<SquadAndUniteButtonHendeler>().SquadConnectedToButton.GetComponent<SquadLogic>();
         foreach (var item in squadLogic.ListOfSpowningPoints)
         {
             squadLogic.ListOfSpowningPointsToChange.Add(item);

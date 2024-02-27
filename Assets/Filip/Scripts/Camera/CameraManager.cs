@@ -6,10 +6,11 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] private float speed = 0.06f;
     [SerializeField] private float zoomSpeed = 10f;
-    [SerializeField] private float rotateSpeed = 0.1f;
+    [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private float maxHeight = 40f;
     [SerializeField] private float minHeight = 4f;
     [SerializeField] private float raycastDistance = 1f;
+    [SerializeField] private GameObject rottacionPoint;
     private LayerMask collisionLayer;
 
     Vector2 p1;
@@ -119,22 +120,13 @@ public class CameraManager : MonoBehaviour
 
     void getCameraRotation()
     {
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetKey(KeyCode.Q))
         {
-            p1 = Input.mousePosition;
+            transform.RotateAround(rottacionPoint.transform.position, rottacionPoint.transform.up, rotateSpeed * Time.deltaTime);
         }
-
-        if (Input.GetMouseButton(2))
+        else if (Input.GetKey(KeyCode.E))
         {
-            p2 = Input.mousePosition;
-
-            float dx = (p2 - p1).x * rotateSpeed;
-            float dy = (p2 - p1).y * rotateSpeed;
-
-            transform.rotation *= Quaternion.Euler(new Vector3(0, dx, 0));
-            transform.GetChild(0).transform.rotation *= Quaternion.Euler(new Vector3(-dy, 0, 0));
-
-            p1 = p2;
+            transform.RotateAround(rottacionPoint.transform.position, rottacionPoint.transform.up, -rotateSpeed * Time.deltaTime);
         }
     }
 }
