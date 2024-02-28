@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -539,7 +539,7 @@ MonoBehaviour:
       Data2: 1127337118
       Data3: -1301139578
       Data4: -886205208
-    Path: event:/Main Theme
+    Path: event:/Robots Main Theme
   Event: 
   PlayEvent: 1
   StopEvent: 2
@@ -1013,6 +1013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b2dd44a2298434e9525a8c2655a61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hudMenager: {fileID: 0}
+  buttonList: []
 --- !u!114 &157418887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,7 +1027,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf2e17b4ba275942ae6ac04342d518d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HUDCaracterTab: {fileID: 1176839877}
 --- !u!114 &157418888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,7 +1484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7813207ffa86b46bb158b0fa2322fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SquadButtonPrefab: {fileID: 0}
+  Unite: {fileID: 0}
   ListOfSpowningPoints:
   - {fileID: 1681989608}
   - {fileID: 1103304983}
@@ -1497,8 +1498,12 @@ MonoBehaviour:
   ListOfSpowningPointsToChange: []
   SquadSpeed: 5
   IsSquadChosen: 0
-  IsLeftClicked: 0
+  IsCaptureingAPoint: 0
+  IsConnetedToAPoint: 0
+  CapturedAPoint: 0
+  resorsSriptableObj: {fileID: 0}
   RotationSpeed: 10000
+  objective: {fileID: 0}
 --- !u!65 &205819825
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1895,6 +1900,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionButtons:
   - {fileID: 136450810}
+  OneRowButtons: {fileID: 0}
+  TwoRowButtons: {fileID: 0}
   heroObj: []
   InputMenager: {fileID: 489486826}
   SelectObj: {fileID: 157418886}
@@ -2099,7 +2106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7813207ffa86b46bb158b0fa2322fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SquadButtonPrefab: {fileID: 0}
+  Unite: {fileID: 0}
   ListOfSpowningPoints:
   - {fileID: 1277091012}
   - {fileID: 1446206845}
@@ -2113,8 +2120,12 @@ MonoBehaviour:
   ListOfSpowningPointsToChange: []
   SquadSpeed: 5
   IsSquadChosen: 0
-  IsLeftClicked: 0
+  IsCaptureingAPoint: 0
+  IsConnetedToAPoint: 0
+  CapturedAPoint: 0
+  resorsSriptableObj: {fileID: 0}
   RotationSpeed: 10000
+  objective: {fileID: 0}
 --- !u!65 &315519258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2355,6 +2366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42db20ba17fca545b51ef928a7a865a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointToFollow: {fileID: 0}
 --- !u!65 &386729392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2964,6 +2976,7 @@ MonoBehaviour:
   maxHeight: 40
   minHeight: 4
   raycastDistance: 10
+  rottacionPoint: {fileID: 0}
 --- !u!4 &759871934
 Transform:
   m_ObjectHideFlags: 0
@@ -3093,7 +3106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7813207ffa86b46bb158b0fa2322fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SquadButtonPrefab: {fileID: 0}
+  Unite: {fileID: 0}
   ListOfSpowningPoints:
   - {fileID: 1281008335}
   - {fileID: 2141993899}
@@ -3107,8 +3120,12 @@ MonoBehaviour:
   ListOfSpowningPointsToChange: []
   SquadSpeed: 5
   IsSquadChosen: 0
-  IsLeftClicked: 0
+  IsCaptureingAPoint: 0
+  IsConnetedToAPoint: 0
+  CapturedAPoint: 0
+  resorsSriptableObj: {fileID: 0}
   RotationSpeed: 10000
+  objective: {fileID: 0}
 --- !u!65 &795414786
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3575,6 +3592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42db20ba17fca545b51ef928a7a865a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointToFollow: {fileID: 0}
 --- !u!65 &988525490
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3740,6 +3758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42db20ba17fca545b51ef928a7a865a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointToFollow: {fileID: 0}
 --- !u!65 &1087437442
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4583,8 +4602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7813207ffa86b46bb158b0fa2322fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SquadButtonPrefab: {fileID: 2856694713381892140, guid: bf0dd18b433c2684390897dbf63ac5cc,
-    type: 3}
+  Unite: {fileID: 0}
   ListOfSpowningPoints:
   - {fileID: 858196710}
   - {fileID: 30182923}
@@ -4598,8 +4616,12 @@ MonoBehaviour:
   ListOfSpowningPointsToChange: []
   SquadSpeed: 5
   IsSquadChosen: 0
-  IsLeftClicked: 0
+  IsCaptureingAPoint: 0
+  IsConnetedToAPoint: 0
+  CapturedAPoint: 0
+  resorsSriptableObj: {fileID: 0}
   RotationSpeed: 720
+  objective: {fileID: 0}
 --- !u!65 &1294740565
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4794,6 +4816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42db20ba17fca545b51ef928a7a865a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointToFollow: {fileID: 0}
 --- !u!65 &1446940461
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5949,6 +5972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42db20ba17fca545b51ef928a7a865a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointToFollow: {fileID: 0}
 --- !u!65 &1983624336
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6125,7 +6149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7813207ffa86b46bb158b0fa2322fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SquadButtonPrefab: {fileID: 0}
+  Unite: {fileID: 0}
   ListOfSpowningPoints:
   - {fileID: 392576395}
   - {fileID: 1841866942}
@@ -6139,8 +6163,12 @@ MonoBehaviour:
   ListOfSpowningPointsToChange: []
   SquadSpeed: 5
   IsSquadChosen: 0
-  IsLeftClicked: 0
+  IsCaptureingAPoint: 0
+  IsConnetedToAPoint: 0
+  CapturedAPoint: 0
+  resorsSriptableObj: {fileID: 0}
   RotationSpeed: 10000
+  objective: {fileID: 0}
 --- !u!65 &1993219147
 BoxCollider:
   m_ObjectHideFlags: 0

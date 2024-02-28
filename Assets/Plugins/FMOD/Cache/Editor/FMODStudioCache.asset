@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: Assets/Szymon/FMOD-kopia/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638437945769861375
+  lastModified: 638447593207477632
   FileSizes:
   - Name: Desktop
-    Value: 1155904
+    Value: 2342272
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -36,15 +36,16 @@ MonoBehaviour:
   - {fileID: 4502911346804352124}
   - {fileID: -5136568647915607316}
   EditorEvents:
-  - {fileID: 4011145362132002668}
+  - {fileID: 1422519375481809172}
+  - {fileID: 8107719232903936488}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5136568647915607316}
   StringsBanks:
   - {fileID: 4502911346804352124}
-  cacheTime: 638437945769871390
+  cacheTime: 638447593207486488
   cacheVersion: 131616
---- !u!114 &4011145362132002668
+--- !u!114 &1422519375481809172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,14 +55,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Main Theme
+  m_Name: event:/Main Menu
   m_EditorClassIdentifier: 
-  Path: event:/Main Theme
+  Path: event:/Main Menu
   Guid:
-    Data1: 1186677060
-    Data2: 1127337118
-    Data3: -1301139578
-    Data4: -886205208
+    Data1: 35060522
+    Data2: 1277510893
+    Data3: -1333958269
+    Data4: -1122215893
   Banks:
   - {fileID: -5136568647915607316}
   IsStream: 1
@@ -70,7 +71,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 86945
+  Length: 96000
 --- !u!114 &4502911346804352124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,8 +87,35 @@ MonoBehaviour:
   Path: Assets/Szymon/FMOD-kopia/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638437945769871390
+  lastModified: 638447593207486488
   FileSizes:
   - Name: Desktop
-    Value: 760
+    Value: 818
   Exists: 1
+--- !u!114 &8107719232903936488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Robots Main Theme
+  m_EditorClassIdentifier: 
+  Path: event:/Robots Main Theme
+  Guid:
+    Data1: 1186677060
+    Data2: 1127337118
+    Data3: -1301139578
+    Data4: -886205208
+  Banks:
+  - {fileID: -5136568647915607316}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 86945

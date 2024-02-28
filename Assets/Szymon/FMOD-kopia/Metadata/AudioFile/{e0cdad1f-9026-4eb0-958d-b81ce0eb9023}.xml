@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e0cdad1f-9026-4eb0-958d-b81ce0eb9023}">
+		<property name="assetPath">
+			<value>Clone RTS - Menu.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>96</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{00207f58-30bf-448d-82f4-e5d547d92b50}</destination>
+		</relationship>
+	</object>
+</objects>
